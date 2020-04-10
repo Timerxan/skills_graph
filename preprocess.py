@@ -9,10 +9,13 @@ import pickle
 import json
 
 
-def process(raw_tags_path, del_nodes_count=10, del_links_count=5, lower=True):
+def process(raw_tags_path, del_nodes_count=0, del_links_count=0, lower=True):
 
     with open(raw_tags_path, 'rb') as f:
         tags_list = pickle.load(f)
+
+    if lower:
+        tags_list = [[i.lower() for i in line] for line in tags_list]
 
     print(len(tags_list))
     # processing tags
@@ -29,15 +32,11 @@ def process(raw_tags_path, del_nodes_count=10, del_links_count=5, lower=True):
     for line in tags_list:
         for tag1, tag2 in itertools.permutations(line, 2):
             if (tag1, tag2) in formatted_tags.keys():
-                #print('------------------------------')
                 formatted_tags[(tag1, tag2)] += 1
-
-    #for k, v in formatted_tags.items():
-    #    print(k, v)
 
     # filtering data with small number of links
     for k, v in formatted_tags.copy().items():
-        if v <= del_links_count:
+        if v < del_links_count:
             del formatted_tags[k]
 
     for k, v in formatted_tags.items():
@@ -47,11 +46,13 @@ def process(raw_tags_path, del_nodes_count=10, del_links_count=5, lower=True):
     links = []
 
     for pair, count in formatted_tags.items():
-        #print(pair)
-        links.append({"source": pair[0].lower(), "target": pair[1].lower(), "value": count})
+        links.append({"source": pair[0], "target": pair[1], "value": count})
 
+    max_count = max(list(nodes_dict.values()))
+    count_step = max_count // 7
     for node, count in nodes_dict.items():
-        nodes.append({"id": node, "group": int(count / 500), "popularity": count})
+
+        nodes.append({"id": node, "group": count // count_step, "popularity": count})
 
     data_to_dump = {"nodes": nodes, "links": links}
 
@@ -67,4 +68,4 @@ def process(raw_tags_path, del_nodes_count=10, del_links_count=5, lower=True):
 
 if __name__ == '__main__':
     raw_tags_path = sys.argv[1]
-    process(raw_tags_path)
+    process(raw_tags_path, del_nodes_count=0, del_links_count=0)
