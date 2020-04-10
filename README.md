@@ -21,3 +21,15 @@ add phrase and vacancies_number
 ##### Ideas
 * monetization: ads? offers? contacts?
 * private domain? + hosting?
+
+##### Data sources
+Used:
+* hh.ru
+To use:
+Not usable:
+To test:
+* Linkedin
+* Stackoverflow jobs
+* Who is hiring hackernews
+* Indeed
+* Glassdoor
