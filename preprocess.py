@@ -5,19 +5,20 @@ Filters out small nodes and weak links not to overload graph visualization
 
 import sys
 import itertools
-import pickle
 import json
 
 
 def process(raw_tags_path, del_nodes_count=0, del_links_count=0, lower=True):
 
     with open(raw_tags_path, 'rb') as f:
-        tags_list = pickle.load(f)
+        in_json = json.load(f)
 
+    tags_list = in_json['items']
     if lower:
         tags_list = [[i.lower() for i in line] for line in tags_list]
 
     print(len(tags_list))
+
     # processing tags
     flattened_list = [i for line in tags_list for i in line]
 
@@ -34,9 +35,9 @@ def process(raw_tags_path, del_nodes_count=0, del_links_count=0, lower=True):
             if (tag1, tag2) in formatted_tags.keys():
                 formatted_tags[(tag1, tag2)] += 1
 
-    # filtering data with small number of links
+    # filtering data with no links
     for k, v in formatted_tags.copy().items():
-        if v < del_links_count:
+        if v <= del_links_count:
             del formatted_tags[k]
 
     for k, v in formatted_tags.items():
@@ -44,22 +45,22 @@ def process(raw_tags_path, del_nodes_count=0, del_links_count=0, lower=True):
 
     nodes = []
     links = []
-
     for pair, count in formatted_tags.items():
         links.append({"source": pair[0], "target": pair[1], "value": count})
 
     max_count = max(list(nodes_dict.values()))
     count_step = max_count // 7
     for node, count in nodes_dict.items():
-
         nodes.append({"id": node, "group": count // count_step, "popularity": count})
 
-    data_to_dump = {"nodes": nodes, "links": links}
+    data_to_dump = in_json.copy()
+    data_to_dump['items'] = {"nodes": nodes, "links": links}
 
-    print(data_to_dump)
+    print('phrase:', data_to_dump['phrase'])
+    print('items number:', data_to_dump['items_number'])
 
     # rename file to use it
-    phrase = raw_tags_path.split('_')[-1][:-4]
+    phrase = raw_tags_path.split('_')[-1][:-5]
     with open(f'./data/proc-tags_{phrase}.json', 'w') as f:
         json.dump(data_to_dump, f)
 

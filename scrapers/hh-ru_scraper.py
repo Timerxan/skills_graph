@@ -10,6 +10,7 @@ import sys
 import requests
 import time
 import pickle
+import json
 
 
 def scrape(phrase_to_search):
@@ -42,8 +43,9 @@ def scrape(phrase_to_search):
                 print()
             time.sleep(0.1)  # not to overload the server
 
-    with open(f"raw-tags_{phrase_to_search}.pkl", "wb") as fp:  # Pickling
-        pickle.dump(tags_list, fp)
+    res = {'phrase': phrase_to_search, 'items_number': len(tags_list), 'items': tags_list}
+    with open(f'./data/raw-tags_{phrase_to_search}.json', 'w') as fp:  # Serializing
+        json.dump(res, fp)
 
     return tags_list
 
