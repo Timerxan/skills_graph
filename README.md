@@ -23,13 +23,13 @@ add phrase and vacancies_number
 * private domain? + hosting?
 
 ##### Data sources
-Used:
-* hh.ru
-To use:
-Not usable:
-To test:
-* Linkedin
-* Stackoverflow jobs
-* Who is hiring hackernews
-* Indeed
-* Glassdoor
+* Used:
+  * hh.ru
+* To use:
+* Not usable:
+* To test:
+  * Linkedin
+  * Stackoverflow jobs
+  * Who is hiring hackernews
+  * Indeed
+  * Glassdoor
