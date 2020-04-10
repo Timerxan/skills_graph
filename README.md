@@ -1,6 +1,6 @@
 # skills-graph
   Demanded skills visualization as a graph\
-  Backend: tags scraper and parcer\
+  Backend: tags scraper and parser\
   Frontend: graph dynamic visualization 
 
 #
