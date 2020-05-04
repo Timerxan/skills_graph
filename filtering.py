@@ -8,27 +8,19 @@ import itertools
 import json
 
 
-def process(raw_tags_path, out_path, del_nodes_count=0, lower=True):
+def process(all_tags_path, del_nodes_count=0, del_links_count=0, lower=True):
 
-    with open(raw_tags_path, 'rb') as f:
+    with open(all_tags_path, 'rb') as f:
         in_json = json.load(f)
 
     tags_list = in_json['items']
-    if lower:
-        tags_list = [[i.lower() for i in line] for line in tags_list]
-
-    print(len(tags_list))
 
     # processing tags
     flattened_list = [i for line in tags_list for i in line]
 
-    # counting words occurrences
-    nodes_dict_all = {i: flattened_list.count(i) for i in set(flattened_list)}
-    # filtering by occurrences count
-    nodes_dict = {k:v for k, v in nodes_dict_all.items() if v > del_nodes_count}
-
-    print('Len nodes dict:', len(nodes_dict_all))
-    print(f'Len nodes dict > {del_nodes_count}: {len(nodes_dict)}')
+    # filtering by occurrences count and counting words occurrences
+    nodes_dict = {i: flattened_list.count(i) for i in set(flattened_list) if flattened_list.count(i) >= del_nodes_count}
+    print(nodes_dict)
 
     # tags connection dict initialization
     formatted_tags = {(tag1, tag2): 0 for tag1, tag2 in itertools.permutations(set(nodes_dict.keys()), 2)}
@@ -39,13 +31,13 @@ def process(raw_tags_path, out_path, del_nodes_count=0, lower=True):
             if (tag1, tag2) in formatted_tags.keys():
                 formatted_tags[(tag1, tag2)] += 1
 
-    # filtering pairs with zero count
+    # filtering data with no links
     for k, v in formatted_tags.copy().items():
-        if v == 0:
+        if v <= del_links_count:
             del formatted_tags[k]
 
-    #for k, v in formatted_tags.items():
-    #    print(k, v)
+    for k, v in formatted_tags.items():
+        print(k, v)
 
     nodes = []
     links = []
@@ -61,9 +53,11 @@ def process(raw_tags_path, out_path, del_nodes_count=0, lower=True):
     data_to_dump['items'] = {"nodes": nodes, "links": links}
 
     print('phrase:', data_to_dump['phrase'])
-    print('vacancies parced::', data_to_dump['items_number'])
+    print('items number:', data_to_dump['items_number'])
 
-    with open(out_path, 'w') as f:
+    # rename file to use it
+    phrase = raw_tags_path.split('_')[-1][:-5]
+    with open(f'./data/proc-tags_{phrase}.json', 'w') as f:
         json.dump(data_to_dump, f)
 
     return formatted_tags
@@ -71,5 +65,4 @@ def process(raw_tags_path, out_path, del_nodes_count=0, lower=True):
 
 if __name__ == '__main__':
     raw_tags_path = sys.argv[1]
-    out_path = sys.argv[2]
-    process(raw_tags_path, out_path, del_nodes_count=5)
+    process(raw_tags_path, del_nodes_count=0, del_links_count=0)

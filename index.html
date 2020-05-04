@@ -40,7 +40,27 @@
                     aria-label="Issue SergheiMihailov/dev_skills_graph on GitHub">Issue</a>
             </div>
         </div>
+
     </div>
+
+    <div class="button-container">
+    	<button id="python-button", onclick="doDisplay('python')">Python</button>
+        <button id="data-scientist-button", onclick="doDisplay('data-scientist')">Data Scientist</button>
+        <button id="machine-learning-button", onclick="doDisplay('machine-learning')">Machine Learning</button>
+        <button id="sql-button", onclick="doDisplay('sql')">SQL</button>
+
+        <script>
+        function doDisplay(tag) {
+            document.getElementById('graphVis').innerHTML = tag;
+        }
+        </script>
+
+    </div>
+
+    <p class='button-container' id='graphVis'>
+    	some text
+    </p>
+
     <div class="graph" id="observablehq-238c4f1f"></div>
 </body>
 
