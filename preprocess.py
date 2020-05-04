@@ -61,7 +61,7 @@ def process(raw_tags_path, out_path, del_nodes_count=0, lower=True):
     data_to_dump['items'] = {"nodes": nodes, "links": links}
 
     print('phrase:', data_to_dump['phrase'])
-    print('vacancies parced::', data_to_dump['items_number'])
+    print('vacancies parced:', data_to_dump['items_number'])
 
     with open(out_path, 'w') as f:
         json.dump(data_to_dump, f)
