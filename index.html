@@ -7,14 +7,12 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
     <!--Python-->
-
     <script type="module">
     import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
     import define from "https://api.observablehq.com/@avk0/untitled.js?v=3";
     const inspect = Inspector.into("#observablehq-0d610989");
     (new Runtime).module(define, name => (name === "chart") && inspect());
     </script>
-
     <script type="module">
     import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
     import define from "https://api.observablehq.com/@avk0/untitled/2.js?v=3";
@@ -23,14 +21,12 @@
     </script>
 
     <!--SQL-->
-
     <script type="module">
     import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
     import define from "https://api.observablehq.com/@avk0/untitled/2.js?v=3";
     const inspect = Inspector.into("#observablehq-a1783738");
     (new Runtime).module(define, name => (name === "chart") && inspect());
     </script>
-
     <script type="module">
     import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
     import define from "https://api.observablehq.com/@avk0/untitled/2.js?v=3";
@@ -39,14 +35,12 @@
     </script>
 
     <!--Data Scientist-->
-
     <script type="module">
     import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
     import define from "https://api.observablehq.com/@avk0/untitled/3.js?v=3";
     const inspect = Inspector.into("#observablehq-12465023");
     (new Runtime).module(define, name => (name === "chart") && inspect());
     </script>
-
     <script type="module">
     import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
     import define from "https://api.observablehq.com/@avk0/untitled/3.js?v=3";
@@ -55,14 +49,12 @@
     </script>
 
     <!--Machine Learning-->
-
     <script type="module">
     import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
     import define from "https://api.observablehq.com/@avk0/untitled/4.js?v=3";
     const inspect = Inspector.into("#observablehq-6714a762");
     (new Runtime).module(define, name => (name === "chart") && inspect());
     </script>
-
     <script type="module">
     import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
     import define from "https://api.observablehq.com/@avk0/untitled/4.js?v=3";
@@ -110,16 +102,20 @@
         <script>
         function doDisplay(tag) {
         if (tag == 'python') {
-            document.getElementByClassName('graph').innerHTML = '<div id="observablehq-0d610989"></div><div id="observablehq-03dcf85b"></div>'
+            document.getElementById('graphVis').innerHTML = tag;
+            <!--document.getElementByClassName('graph').innerHTML = '<div id="observablehq-0d610989"></div><div id="observablehq-03dcf85b"></div>'-->
         }
         if (tag == 'sql') {
-            document.getElementByClassName('graph').innerHTML = '<div id="observablehq-a1783738"></div><div id="observablehq-82f4527e"></div>'
+            document.getElementById('graphVis').innerHTML = tag;
+            <!--document.getElementByClassName('graph').innerHTML = '<div id="observablehq-a1783738"></div><div id="observablehq-82f4527e"></div>';-->
         }
         if (tag == 'data-scientist') {
-            document.getElementByClassName('graph').innerHTML = '<div id="observablehq-e0c89054"></div><div id="observablehq-12465023"></div>'
+            document.getElementById('graphVis').innerHTML = tag;
+            <!--document.getElementByClassName('graph').innerHTML = '<div id="observablehq-e0c89054"></div><div id="observablehq-12465023"></div>';-->
         }
         if (tag == 'machine-learning') {
-            document.getElementByClassName('graph').innerHTML = '<div id="observablehq-a29a4125"></div><div id="observablehq-6714a762"></div>'
+            document.getElementById('graphVis').innerHTML = tag;
+            <!--document.getElementByClassName('graph').innerHTML = '<div id="observablehq-a29a4125"></div><div id="observablehq-6714a762"></div>';-->
         }
         }
         </script>
