@@ -24,7 +24,21 @@
 
     <!--SQL-->
 
+    <div id="observablehq-a1783738"></div>
+    <script type="module">
+    import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+    import define from "https://api.observablehq.com/@avk0/untitled/2.js?v=3";
+    const inspect = Inspector.into("#observablehq-a1783738");
+    (new Runtime).module(define, name => (name === "chart") && inspect());
+    </script>
 
+    <div id="observablehq-82f4527e"></div>
+    <script type="module">
+    import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+    import define from "https://api.observablehq.com/@avk0/untitled/2.js?v=3";
+    const inspect = Inspector.into("#observablehq-82f4527e");
+    (new Runtime).module(define, name => (name === "print_data") && inspect());
+    </script>
 
     <!--Data Scientist-->
 
@@ -44,11 +58,23 @@
     (new Runtime).module(define, name => (name === "data") && inspect());
     </script>
 
-
-
     <!--Machine Learning-->
 
+    <div id="observablehq-6714a762"></div>
+    <script type="module">
+    import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+    import define from "https://api.observablehq.com/@avk0/untitled/4.js?v=3";
+    const inspect = Inspector.into("#observablehq-6714a762");
+    (new Runtime).module(define, name => (name === "chart") && inspect());
+    </script>
 
+    <div id="observablehq-a29a4125"></div>
+    <script type="module">
+    import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+    import define from "https://api.observablehq.com/@avk0/untitled/4.js?v=3";
+    const inspect = Inspector.into("#observablehq-a29a4125");
+    (new Runtime).module(define, name => (name === "data") && inspect());
+    </script>
 
 </head>
 
@@ -89,7 +115,19 @@
 
         <script>
         function doDisplay(tag) {
-            document.getElementById('graphVis').innerHTML = tag;
+        if (tag == 'python') {
+            document.getElementByClassName('graph').innerHTML = '<div id="observablehq-0d610989"></div>'
+        }
+        if (tag == 'sql') {
+            document.getElementByClassName('graph').innerHTML = '<div id="observablehq-a1783738"></div>'
+        }
+        if (tag == 'data-scientist') {
+            document.getElementByClassName('graph').innerHTML = '<div id="observablehq-e0c89054"></div>'
+        }
+        if (tag == 'machine-learning') {
+            document.getElementByClassName('graph').innerHTML = '<div id="observablehq-a29a4125"></div>'
+        }
+
         }
         </script>
 
