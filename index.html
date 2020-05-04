@@ -12,6 +12,13 @@
     const inspect = Inspector.into("#observablehq-0d610989");
     (new Runtime).module(define, name => (name === "chart") && inspect());
     </script>
+
+    <script type="module">
+    import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+    import define from "https://api.observablehq.com/@avk0/untitled/2.js?v=3";
+    const inspect = Inspector.into("#observablehq-03dcf85b");
+    (new Runtime).module(define, name => (name === "print_data") && inspect());
+    </script>
 </head>
 
 <body>
@@ -60,7 +67,7 @@
     <p class='button-container' id='graphVis'>
     	some text
     </p>
-
+    <div id="observablehq-03dcf85b"></div>
     <div class="graph" id="observablehq-0d610989"></div>
 </body>
 
