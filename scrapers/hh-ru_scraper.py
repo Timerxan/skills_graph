@@ -1,15 +1,14 @@
 """ Scraping vacancies from hh.ru.
 
 As argument use word or phrase in double quotes.
+Saves results to ./data/raw-tags_{phrase_to_search}.json' file
 
-Example:
-    "phrase ro search" """
+"""
 
 
 import sys
 import requests
 import time
-import pickle
 import json
 
 

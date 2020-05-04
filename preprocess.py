@@ -1,6 +1,9 @@
 """ Preprocessing module
 
 Filters out small nodes and weak links not to overload graph visualization
+
+Usage example:
+    preprocess.py "./data/raw/raw-tags_machine learning.json" "./data/filtered_5/filt-tags_machine-learning.json"
 """
 
 import sys
