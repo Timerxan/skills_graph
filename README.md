@@ -22,6 +22,19 @@ Visualization is based on JavaScript and few [Observable notebooks.](https://obs
 Some additional Python visualization can be done using Ipython Notebook: `./scrapers/hh-ru_scraper.ipynb` 
 
 Any ideas are highly appreciated!
+
+### How add data:
+You can add data in json for visualization to the `./data/for_visualization` folder and also insert the title and the name of the file in `./data/for_visualization/index.json`. The data should have the following structure (example):
+```json
+{
+  "items": {
+    "nodes": [{"id": "data science", "popularity": 28}, ...],
+    "links": [{"source": "data science", "target": "spark", "value": 8}, ...]
+  }
+}
+```
+Popularity denotes the total number of occurences of a term (for nodes). Value denotes the number of co-occurences of source and target (for links).
+
 ### TODO
 
 ##### Frontend:

@@ -5,56 +5,7 @@
     <link rel="stylesheet" href="style.css" />
     <title>A visualisation of developer skills in demand</title>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-
-    <!--Python-->
-    <script type="module">
-        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js"; import define from "https://api.observablehq.com/@avk0/untitled.js?v=3"; const inspect = Inspector.into("#observablehq-0d610989"); (new Runtime).module(define, name => (name === "chart") && inspect());
-    </script>
-    <script type="module">
-        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
-        import define from "https://api.observablehq.com/@avk0/untitled.js?v=3";
-        const inspect = Inspector.into("#observablehq-00509d0b");
-        (new Runtime).module(define, name => (name === "textData") && inspect());
-    </script>
-
-    <!--SQL-->
-    <script type="module">
-        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js"; import define from "https://api.observablehq.com/@avk0/untitled/2.js?v=3"; const inspect = Inspector.into("#observablehq-a1783738"); (new Runtime).module(define, name => (name === "chart") && inspect());
-    </script>
-    <script type="module">
-        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js"; import define from "https://api.observablehq.com/@avk0/untitled/2.js?v=3"; const inspect = Inspector.into("#observablehq-82f4527e"); (new Runtime).module(define, name => (name === "print_data") && inspect());
-    </script>
-
-    <!--Data Scientist-->
-    <script type="module">
-        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
-        import define from "https://api.observablehq.com/@avk0/untitled/3.js?v=3";
-        const inspect = Inspector.into("#observablehq-1c9b45bf");
-        (new Runtime).module(define, name => (name === "chart") && inspect());
-    </script>
-
-    <script type="module">
-    import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
-    import define from "https://api.observablehq.com/@avk0/untitled/3.js?v=3";
-    const inspect = Inspector.into("#observablehq-ccc297da");
-    (new Runtime).module(define, name => (name === "textData") && inspect());
-    </script>
-
-    <!--Machine Learning-->
-    <script type="module">
-        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
-        import define from "https://api.observablehq.com/@avk0/untitled/4.js?v=3";
-        const inspect = Inspector.into("#observablehq-339dbcb7");
-        (new Runtime).module(define, name => (name === "chart") && inspect());
-    </script>
-
-    <script type="module">
-        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
-        import define from "https://api.observablehq.com/@avk0/untitled/4.js?v=3";
-        const inspect = Inspector.into("#observablehq-1e422403");
-        (new Runtime).module(define, name => (name === "printText") && inspect());
-    </script>
-
+    <script type="module" src="graph_visualization.js"></script>
 </head>
 
 <body>
@@ -70,6 +21,7 @@
                     <li>The wider the link, the closer the nodes, the more related are the two skills (seen together).</li>
                     <li>Choose the field of interest pushing the button.</li>
                 </ul>
+                <a href="https://github.com/avk0/skills_graph">Link to GitHub repo</a>
             </p>
             <div class="buttons-div">
                 <a class="github-button" href="https://github.com/avk0/dev_skills_graph"
@@ -81,59 +33,22 @@
             </div>
         </div>
 
+    <div id="button-container"></div>
+    <div id="graph-container"></div>
+
+    <script type="module">
+        import { createElementsFromDataUrls } from "./graph_visualization.js";
+        
+        function loadAndDisplayGraphs() {
+            const data_urls = fetch("./data/for_visualization/index.json").then((res) => res.json());
+            document.getElementById("button-container").innerHTML = "";
+            document.getElementById("graph-container").innerHTML = ""
+            createElementsFromDataUrls(data_urls);
+        }
+
+        loadAndDisplayGraphs()
+
+    </script>
     </div>
-
-    <div class="button-container">
-        <button id="python-button" onclick="doDisplay('python')">Python</button>
-        <button id="data-scientist-button" onclick="doDisplay('data-scientist')">Data Scientist</button>
-        <button id="machine-learning-button" onclick="doDisplay('machine-learning')">Machine Learning</button>
-        <button id="sql-button" onclick="doDisplay('sql')">SQL</button>
-
-    </div>
-
-    <div class="button-container" id="observablehq-00509d0b"></div>
-    <div class="button-container" id="observablehq-82f4527e"></div>
-    <div class="button-container" id="observablehq-ccc297da"></div>
-    <div class="button-container" id="observablehq-1e422403"></div>
-    <div class="graph" id="observablehq-0d610989"></div>
-    <div class="graph" id="observablehq-a1783738"></div>
-    <div class="graph" id="observablehq-1c9b45bf"></div>
-    <div class="graph" id="observablehq-339dbcb7"></div>
 </body>
-
-<script>
-    const options = new Map([
-        ["pythonElements", ["observablehq-00509d0b", "observablehq-0d610989"]],
-        ["sqlElements", ["observablehq-82f4527e", "observablehq-a1783738"]],
-        ["dataSciElements", ["observablehq-ccc297da", "observablehq-1c9b45bf"]],
-        ["mlElements", ["observablehq-1e422403", "observablehq-339dbcb7"]]
-    ])
-    options.forEach(elemList => [...elemList].map(id => hideElement(id)))
-    options.get("pythonElements").map(id => showElement(id))
-
-    function hideElement(id) {
-        document.getElementById(id).style.display = "none"
-    }
-
-    function showElement(id) {
-        document.getElementById(id).style.display = "block"
-    }
-
-    function doDisplay(tag) {
-        options.forEach(elemList => [...elemList].map(id => hideElement(id)))
-        if (tag == 'python') {
-            options.get("pythonElements").map(id => showElement(id))
-        }
-        if (tag == 'sql') {
-            options.get("sqlElements").map(id => showElement(id))
-        }
-        if (tag == 'data-scientist') {
-            options.get("dataSciElements").map(id => showElement(id))
-        }
-        if (tag == 'machine-learning') {
-            options.get("mlElements").map(id => showElement(id))
-        }
-    }
-</script>
-
 </html>
