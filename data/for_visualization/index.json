@@ -1,0 +1,6 @@
+{
+  "python": "filt-tags_python.json",
+  "data-scientist": "filt-tags_data-scientist.json",
+  "machine-learning": "filt-tags_machine-learning.json",
+  "sql": "filt-tags_sql.json"
+}
