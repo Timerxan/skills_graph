@@ -2,6 +2,7 @@
 A graphical representation of relations between programming languages, technologies and skills in demand, based on thousands of job postings.
 
 Dynamic visualization: https://avk0.github.io/skills_graph/
+
 Article on Habr.com (in Russian): https://habr.com/ru/post/500952/
 
 ### Sample
