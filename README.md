@@ -1,7 +1,8 @@
 # skills-graph 
-https://avk0.github.io/skills_graph/
-
 A graphical representation of relations between programming languages, technologies and skills in demand, based on thousands of job postings.
+
+Dynamic visualization: https://avk0.github.io/skills_graph/
+Article on Habr.com (in Russian): https://habr.com/ru/post/500952/
 
 ### Sample
 ~500 vacancies parced by keyword "Machine Learning" (headhunter.ru)
@@ -23,7 +24,7 @@ Some additional Python visualization can be done using Ipython Notebook: `./scra
 
 Any ideas are highly appreciated!
 
-### How add data:
+### How to add data:
 You can add data in json for visualization to the `./data/for_visualization` folder and also insert the title and the name of the file in `./data/for_visualization/index.json`. The data should have the following structure (example):
 ```json
 {
@@ -36,10 +37,6 @@ You can add data in json for visualization to the `./data/for_visualization` fol
 Popularity denotes the total number of occurences of a term (for nodes). Value denotes the number of co-occurences of source and target (for links).
 
 ### TODO
-
-##### Frontend:
-* fasten visualization
-* add filtering by size
 
 ##### Data sources
 * Used:
@@ -54,3 +51,4 @@ Popularity denotes the total number of occurences of a term (for nodes). Value d
 ### Contributors
 [Andrei Koval](https://github.com/avk0)\
 [Serghei Mihailov](https://github.com/SergheiMihailov)
+[JleMyP](https://github.com/JleMyP)
