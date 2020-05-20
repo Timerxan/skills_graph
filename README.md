@@ -17,8 +17,18 @@ We can see, that essential skills for machine learning jobs are Python, SQL, Lin
   Frontend: dynamic graph visualization 
   
 ### How to use
-* Use scraper in `./scraper` folder to get more data.
-* Use `preprocess.py` to format and filter tags data.
+Simple way:
+* run `/ipython notebook/hh-ru_scraper.ipynb`,
+* set SEARCH_WORD to desired,
+* run all cells.
+
+For full dynamic visualization 
+
+* run `/scraper/hh-ru_scraper.py` folder to scrape more data,
+* run `/scraper/preprocess.py` to format data,
+* add resulting file to `/data/for_visualization/` folder,
+* add new file name in `/data/for_visualization/index.json` file,
+* load index.html, new button with dynamic graph should appear.
 
 Visualization is based on JavaScript and few [Observable notebooks.](https://observablehq.com/@avk0?tab=notebooks)\
 Some additional Python visualization can be done using Ipython Notebook: `./scrapers/hh-ru_scraper.ipynb` 
