@@ -64,7 +64,7 @@ def scrape(phrase_to_search):
         time.sleep(0.1)  # not to overload the server
 
     res = {'phrase': phrase_to_search, 'items_number': len(tags_list), 'items': tags_list}
-    with open(f'./data/raw-tags_{phrase_to_search}.json', 'w') as fp:  # serializing
+    with open(f'./data/raw/raw-tags_{phrase_to_search}.json', 'w') as fp:  # serializing
         json.dump(res, fp)
 
     return tags_list
