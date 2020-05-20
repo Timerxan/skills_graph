@@ -65,7 +65,7 @@ def scrape(phrase_to_search):
 
     res = {'phrase': phrase_to_search, 'items_number': len(tags_list), 'items': tags_list}
     with open(f'./data/raw-tags_{phrase_to_search}.json', 'w') as fp:  # serializing
-        json.dump(res, fp)
+        json.dump(res, fp, ensure_ascii=False)
 
     return tags_list
 

@@ -67,7 +67,7 @@ def process(raw_tags_path, out_path, del_nodes_count=0, lower=True):
     print('vacancies parced:', data_to_dump['items_number'])
 
     with open(out_path, 'w') as f:
-        json.dump(data_to_dump, f)
+        json.dump(data_to_dump, f, ensure_ascii=False)
 
     return formatted_tags
 
