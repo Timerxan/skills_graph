@@ -13,11 +13,12 @@ import time
 
 import requests
 
-HH_MAX_PAGES_COUNT = 20
-FETCH_FOR_DAYS = 365*3
+PAGES_BATCH_SIZE = 20  # PAGES_BATCH_SIZE*PER_PAGE should be <2000
+PER_PAGE = 100
+FETCH_FOR_DAYS = 365
 
 
-def scrape(phrase_to_search):
+def scrape(phrase_to_search, save_path='raw_tags_test.json'):
     ses = requests.Session()
     ses.headers = {'HH-User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0'}
 
@@ -25,20 +26,23 @@ def scrape(phrase_to_search):
     date_from = date_to - datetime.timedelta(days=FETCH_FOR_DAYS)
     params = {
         'text': phrase_to_search,
-        'per_page': 100,
+        'per_page': PER_PAGE,
+        'order_by': 'publication_time',
         'date_from': date_from.isoformat(),
         'date_to': date_to.isoformat(),
     }
-    url = f'https://api.hh.ru/vacancies'
+    URL = f'https://api.hh.ru/vacancies'
     vacancies_ids = set()
-    total_pages = 0
+    pages_scraped = 0  # indicator
     done = False
-    while not done:  # getting list of all vacancies ids
-        for pag_num in range(HH_MAX_PAGES_COUNT):
+    
+    # getting list of all vacancies ids
+    while not done:
+        for page_num in range(PAGES_BATCH_SIZE):
             time.sleep(0.5)
-            print(f'\rscraping page {total_pages + pag_num}', end='')
-            params['page'] = pag_num
-            res = ses.get(url, params=params).json()
+            print(f'\rscraping page {pages_scraped + page_num}', end='')
+            params['page'] = page_num
+            res = ses.get(URL, params=params).json()
             if not res['items']:
                 done = True
                 break
@@ -46,11 +50,11 @@ def scrape(phrase_to_search):
             vacancies_ids.update([item['id'] for item in res['items']])
         if done:
             break
-        total_pages += HH_MAX_PAGES_COUNT
+        pages_scraped += PAGES_BATCH_SIZE
         params['date_to'] = last_vacancy['published_at']
     print()
 
-    # parsing vacancies ids, getting vacancy page and scraping tags from each vacancy
+    # parsing vacancy pages and scraping tags from each vacancy
     tags_list = []
     for vac_id in vacancies_ids:
         vac_res = ses.get(f'https://api.hh.ru/vacancies/{vac_id}')
@@ -63,16 +67,20 @@ def scrape(phrase_to_search):
             print()
         time.sleep(0.1)  # not to overload the server
 
-    res = {'phrase': phrase_to_search, 'items_number': len(tags_list), 'items': tags_list}
-    with open(f'./data/raw-tags_{phrase_to_search}.json', 'w') as fp:  # serializing
+    res = {'parse_date': str(datetime.datetime.now()),
+           'phrase': phrase_to_search,
+           'items_number': len(tags_list),
+           'items': tags_list}
+    
+    with open(save_path, 'w', encoding='utf8') as fp:  # serializing
         json.dump(res, fp, ensure_ascii=False)
 
     return tags_list
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print('Usage: ./scrapers/hh-ru_scraper.py python')
+    if len(sys.argv) != 2:
+        print('Usage: ./scrapers/hh-ru_scraper.py "python"')
     else:
         phrase_to_search = sys.argv[1]
         tags_list = scrape(phrase_to_search)

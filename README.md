@@ -17,6 +17,7 @@ We can see, that essential skills for machine learning jobs are Python, SQL, Lin
   Frontend: dynamic graph visualization 
   
 ### How to use
+Please see Example.ipynb for a usage example.
 * Use scraper in `./scraper` folder to get more data.
 * Use `preprocess.py` to format and filter tags data.
 
@@ -51,5 +52,5 @@ Popularity denotes the total number of occurences of a term (for nodes). Value d
 
 ### Contributors
 [Andrei Koval](https://github.com/avk0)\
-[Serghei Mihailov](https://github.com/SergheiMihailov)
+[Serghei Mihailov](https://github.com/SergheiMihailov)\
 [JleMyP](https://github.com/JleMyP)
