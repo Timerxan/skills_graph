@@ -14,8 +14,8 @@ def gr_vis(filt_tags_path, node_cut_off_level=1, edge_cut_off_level=1):
     nodes = [node["id"] for node in tags_json["items"]["nodes"]
              if int(node_nc * node["popularity"]) > node_cut_off_level]
     nodes_size = [2 + int((node_nc * node["popularity"])**0.5)
-                    for node in tags_json["items"]["nodes"]
-                    if int(node_nc * node["popularity"]) > node_cut_off_level]
+                  for node in tags_json["items"]["nodes"]
+                  if int(node_nc * node["popularity"]) > node_cut_off_level]
 
     def color_from_popularity(popularity):  # popularity 0-100
         if popularity > 75 : return 'red'
