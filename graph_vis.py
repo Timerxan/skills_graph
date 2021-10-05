@@ -2,7 +2,7 @@ from pyvis.network import Network
 import json
 
 
-def gr_vis(filt_tags_path, node_cut_off_level=2, edge_cut_off_level=5):
+def gr_vis(filt_tags_path, node_cut_off_level=1, edge_cut_off_level=1):
     with open(filt_tags_path, 'r', encoding="utf-8") as f:
         tags_json = json.load(f)
 
@@ -13,7 +13,7 @@ def gr_vis(filt_tags_path, node_cut_off_level=2, edge_cut_off_level=5):
 
     nodes = [node["id"] for node in tags_json["items"]["nodes"]
              if int(node_nc * node["popularity"]) > node_cut_off_level]
-    nodes_size = [2 + int((node_nc * node["popularity"]) ** 0.5)
+    nodes_size = [2 + int((node_nc * node["popularity"])**0.5)
                     for node in tags_json["items"]["nodes"]
                     if int(node_nc * node["popularity"]) > node_cut_off_level]
 
@@ -35,12 +35,50 @@ def gr_vis(filt_tags_path, node_cut_off_level=2, edge_cut_off_level=5):
 
     net = Network(800, 800)
 
-    net.add_nodes(nodes, color=nodes_color, size=nodes_size)
+    for node, node_size, color in zip(nodes, nodes_size, nodes_color):
+        net.add_node(node, hidden=False, shape='dot', color=color, size=node_size, mass=node_size,
+                     borderWidth=0, borderWidthSelected=2)
+
     net.add_edges(edges)
     net.inherit_edge_colors(False)
-    net.show_buttons(filter_='physics')
+    net.set_edge_smooth('diagonalCross')
+    net.set_options("""
+        var options = {
+          "nodes": {
+            "font": {
+              "strokeWidth": 3
+            }
+          },
+          "edges": {
+            "color": {
+              "color": "rgba(66,66,65,0.58)",
+              "highlight": "rgba(255,148,45,1)",
+              "inherit": false
+            },
+            "font": {
+              "strokeWidth": 42
+            },
+            "smooth": {
+              "type": "cubicBezier",
+              "forceDirection": "none"
+            }
+          },
+            "physics": {
+                "barnesHut": {
+                  "gravitationalConstant": -1050,
+                  "centralGravity": 4,
+                  "springLength": 50,
+                  "springConstant": 0.015,
+                  "damping": 0.4,
+                  "avoidOverlap": 0.2
+                },
+                "minVelocity": 0.75
+          }
+        }
+                    """)
+    # net.show_buttons(filter_='physics')
     net.show('graph_vis.html')
 
 
 if __name__ == '__main__':
-    gr_vis('data/for_visualization/filt-tags_python.json')
+    gr_vis('data/for_visualization/filt-tags_python.json',5,5)
