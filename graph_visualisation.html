@@ -1,0 +1,80 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 800;
+            height: 800;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"borderWidth": 0, "borderWidthSelected": 2, "color": "blue", "hidden": false, "id": "css", "label": "css", "mass": 4, "shape": "dot", "size": 4}, {"borderWidth": 0, "borderWidthSelected": 2, "color": "blue", "hidden": false, "id": "javascript", "label": "javascript", "mass": 6, "shape": "dot", "size": 6}, {"borderWidth": 0, "borderWidthSelected": 2, "color": "blue", "hidden": false, "id": "docker", "label": "docker", "mass": 4, "shape": "dot", "size": 4}, {"borderWidth": 0, "borderWidthSelected": 2, "color": "blue", "hidden": false, "id": "c++", "label": "c++", "mass": 5, "shape": "dot", "size": 5}, {"borderWidth": 0, "borderWidthSelected": 2, "color": "blue", "hidden": false, "id": "mysql", "label": "mysql", "mass": 5, "shape": "dot", "size": 5}, {"borderWidth": 0, "borderWidthSelected": 2, "color": "green", "hidden": false, "id": "postgresql", "label": "postgresql", "mass": 7, "shape": "dot", "size": 7}, {"borderWidth": 0, "borderWidthSelected": 2, "color": "blue", "hidden": false, "id": "bash", "label": "bash", "mass": 4, "shape": "dot", "size": 4}, {"borderWidth": 0, "borderWidthSelected": 2, "color": "green", "hidden": false, "id": "sql", "label": "sql", "mass": 8, "shape": "dot", "size": 8}, {"borderWidth": 0, "borderWidthSelected": 2, "color": "blue", "hidden": false, "id": "java", "label": "java", "mass": 5, "shape": "dot", "size": 5}, {"borderWidth": 0, "borderWidthSelected": 2, "color": "blue", "hidden": false, "id": "mongodb", "label": "mongodb", "mass": 4, "shape": "dot", "size": 4}, {"borderWidth": 0, "borderWidthSelected": 2, "color": "blue", "hidden": false, "id": "html", "label": "html", "mass": 4, "shape": "dot", "size": 4}, {"borderWidth": 0, "borderWidthSelected": 2, "color": "green", "hidden": false, "id": "git", "label": "git", "mass": 7, "shape": "dot", "size": 7}, {"borderWidth": 0, "borderWidthSelected": 2, "color": "blue", "hidden": false, "id": "php", "label": "php", "mass": 4, "shape": "dot", "size": 4}, {"borderWidth": 0, "borderWidthSelected": 2, "color": "blue", "hidden": false, "id": "django framework", "label": "django framework", "mass": 6, "shape": "dot", "size": 6}, {"borderWidth": 0, "borderWidthSelected": 2, "color": "blue", "hidden": false, "id": "ms sql", "label": "ms sql", "mass": 4, "shape": "dot", "size": 4}, {"borderWidth": 0, "borderWidthSelected": 2, "color": "green", "hidden": false, "id": "linux", "label": "linux", "mass": 8, "shape": "dot", "size": 8}, {"borderWidth": 0, "borderWidthSelected": 2, "color": "blue", "hidden": false, "id": "\u0430\u043d\u0433\u043b\u0438\u0439\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a", "label": "\u0430\u043d\u0433\u043b\u0438\u0439\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a", "mass": 5, "shape": "dot", "size": 5}, {"borderWidth": 0, "borderWidthSelected": 2, "color": "blue", "hidden": false, "id": "\u043e\u043e\u043f", "label": "\u043e\u043e\u043f", "mass": 4, "shape": "dot", "size": 4}, {"borderWidth": 0, "borderWidthSelected": 2, "color": "red", "hidden": false, "id": "python", "label": "python", "mass": 12, "shape": "dot", "size": 12}]);
+        edges = new vis.DataSet([{"from": "mongodb", "to": "git", "width": 0}, {"from": "mongodb", "to": "linux", "width": 0}, {"from": "mongodb", "to": "postgresql", "width": 0}, {"from": "mongodb", "to": "python", "width": 1}, {"from": "html", "to": "git", "width": 0}, {"from": "html", "to": "css", "width": 0}, {"from": "html", "to": "mysql", "width": 0}, {"from": "html", "to": "javascript", "width": 0}, {"from": "html", "to": "sql", "width": 0}, {"from": "html", "to": "python", "width": 0}, {"from": "git", "to": "linux", "width": 2}, {"from": "git", "to": "php", "width": 0}, {"from": "git", "to": "css", "width": 0}, {"from": "git", "to": "mysql", "width": 1}, {"from": "git", "to": "postgresql", "width": 2}, {"from": "git", "to": "javascript", "width": 1}, {"from": "git", "to": "docker", "width": 0}, {"from": "git", "to": "bash", "width": 0}, {"from": "git", "to": "sql", "width": 1}, {"from": "git", "to": "\u043e\u043e\u043f", "width": 0}, {"from": "git", "to": "django framework", "width": 1}, {"from": "git", "to": "java", "width": 0}, {"from": "git", "to": "c++", "width": 0}, {"from": "git", "to": "python", "width": 5}, {"from": "ms sql", "to": "sql", "width": 0}, {"from": "ms sql", "to": "python", "width": 0}, {"from": "linux", "to": "mysql", "width": 0}, {"from": "linux", "to": "postgresql", "width": 1}, {"from": "linux", "to": "javascript", "width": 0}, {"from": "linux", "to": "docker", "width": 0}, {"from": "linux", "to": "bash", "width": 1}, {"from": "linux", "to": "sql", "width": 1}, {"from": "linux", "to": "\u0430\u043d\u0433\u043b\u0438\u0439\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a", "width": 0}, {"from": "linux", "to": "\u043e\u043e\u043f", "width": 0}, {"from": "linux", "to": "django framework", "width": 1}, {"from": "linux", "to": "java", "width": 0}, {"from": "linux", "to": "c++", "width": 0}, {"from": "linux", "to": "python", "width": 6}, {"from": "php", "to": "mysql", "width": 0}, {"from": "php", "to": "postgresql", "width": 0}, {"from": "php", "to": "javascript", "width": 0}, {"from": "php", "to": "python", "width": 0}, {"from": "css", "to": "javascript", "width": 0}, {"from": "css", "to": "python", "width": 0}, {"from": "mysql", "to": "postgresql", "width": 1}, {"from": "mysql", "to": "javascript", "width": 0}, {"from": "mysql", "to": "sql", "width": 0}, {"from": "mysql", "to": "django framework", "width": 1}, {"from": "mysql", "to": "python", "width": 2}, {"from": "postgresql", "to": "javascript", "width": 0}, {"from": "postgresql", "to": "docker", "width": 0}, {"from": "postgresql", "to": "sql", "width": 1}, {"from": "postgresql", "to": "django framework", "width": 1}, {"from": "postgresql", "to": "python", "width": 4}, {"from": "javascript", "to": "sql", "width": 0}, {"from": "javascript", "to": "\u043e\u043e\u043f", "width": 0}, {"from": "javascript", "to": "django framework", "width": 0}, {"from": "javascript", "to": "java", "width": 0}, {"from": "javascript", "to": "python", "width": 2}, {"from": "docker", "to": "python", "width": 1}, {"from": "bash", "to": "python", "width": 1}, {"from": "sql", "to": "\u0430\u043d\u0433\u043b\u0438\u0439\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a", "width": 0}, {"from": "sql", "to": "\u043e\u043e\u043f", "width": 0}, {"from": "sql", "to": "django framework", "width": 1}, {"from": "sql", "to": "java", "width": 1}, {"from": "sql", "to": "c++", "width": 0}, {"from": "sql", "to": "python", "width": 6}, {"from": "\u0430\u043d\u0433\u043b\u0438\u0439\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a", "to": "python", "width": 1}, {"from": "\u043e\u043e\u043f", "to": "python", "width": 1}, {"from": "django framework", "to": "python", "width": 4}, {"from": "java", "to": "c++", "width": 0}, {"from": "java", "to": "python", "width": 1}, {"from": "c++", "to": "python", "width": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {"nodes": {"font": {"strokeWidth": 3}}, "edges": {"color": {"color": "rgba(66,66,65,0.58)", "highlight": "rgba(255,148,45,1)", "inherit": false}, "font": {"strokeWidth": 42}, "smooth": {"type": "cubicBezier", "forceDirection": "none"}}, "physics": {"barnesHut": {"gravitationalConstant": -1050, "centralGravity": 4, "springLength": 50, "springConstant": 0.015, "damping": 0.4, "avoidOverlap": 0.2}, "minVelocity": 0.75}};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

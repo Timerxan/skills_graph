@@ -43,42 +43,42 @@ def gr_vis(filt_tags_path, node_cut_off_level=1, edge_cut_off_level=1):
     net.inherit_edge_colors(False)
     net.set_edge_smooth('diagonalCross')
     net.set_options("""
-        var options = {
-          "nodes": {
-            "font": {
-              "strokeWidth": 3
-            }
-          },
-          "edges": {
-            "color": {
-              "color": "rgba(66,66,65,0.58)",
-              "highlight": "rgba(255,148,45,1)",
-              "inherit": false
-            },
-            "font": {
-              "strokeWidth": 42
-            },
-            "smooth": {
-              "type": "cubicBezier",
-              "forceDirection": "none"
-            }
-          },
-            "physics": {
-                "barnesHut": {
-                  "gravitationalConstant": -1050,
-                  "centralGravity": 4,
-                  "springLength": 50,
-                  "springConstant": 0.015,
-                  "damping": 0.4,
-                  "avoidOverlap": 0.2
-                },
-                "minVelocity": 0.75
-          }
-        }
+                    var options = {
+                      "nodes": {
+                        "font": {
+                          "strokeWidth": 3
+                        }
+                      },
+                      "edges": {
+                        "color": {
+                          "color": "rgba(66,66,65,0.58)",
+                          "highlight": "rgba(255,148,45,1)",
+                          "inherit": false
+                        },
+                        "font": {
+                          "strokeWidth": 42
+                        },
+                        "smooth": {
+                          "type": "cubicBezier",
+                          "forceDirection": "none"
+                        }
+                      },
+                        "physics": {
+                            "barnesHut": {
+                              "gravitationalConstant": -1050,
+                              "centralGravity": 4,
+                              "springLength": 50,
+                              "springConstant": 0.015,
+                              "damping": 0.4,
+                              "avoidOverlap": 0.2
+                            },
+                            "minVelocity": 0.75
+                      }
+                    }
                     """)
-    # net.show_buttons(filter_='physics')
-    net.show('graph_vis.html')
+    net.write_html('graph_visualisation.html')
+    # net.show('graph_vis.html')
 
 
 if __name__ == '__main__':
-    gr_vis('data/for_visualization/filt-tags_python.json',5,5)
+    gr_vis('data/for_visualization/filt-tags_python.json', node_cut_off_level=5, edge_cut_off_level=5)
