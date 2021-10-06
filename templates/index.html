@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href={{ style }} />
+    <title>Visualisation of skills</title>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+
+<body>
+    <div class="page">
+        <div class="landing">
+            <h1>A visualisation of skills in demand</h1>
+            <p> What skills are in demand?
+                We scraped thousands of job postings, connecting skills into one graph.
+                If you want to evolve as a professional, you can use this as a hint.
+
+                <ul>
+                    <li>The bigger the node, the more in demand the skill.</li>
+                    <li>The wider the link, the closer the nodes, the more related are the two skills (seen together).</li>
+                    <li>Choose the field of interest pushing the button.</li>
+                </ul>
+                <a href="https://github.com/avk0/skills_graph">Link to GitHub repo</a>
+            </p>
+            <div class="buttons-div">
+                <a class="github-button" href="https://github.com/avk0/dev_skills_graph"
+                    data-icon="octicon-star" data-size="large" data-show-count="true"
+                    aria-label="Star avk0/dev_skills_graph on GitHub">Star</a>
+                <a class="github-button" href="https://github.com/avk0/dev_skills_graph/issues"
+                    data-icon="octicon-issue-opened" data-size="large" data-show-count="true"
+                    aria-label="Issue avk0/dev_skills_graph on GitHub">Issue</a>
+            </div>
+        </div>
+    <div class = "line"></div>
+    <div id="button-container">
+        <form action="/send" method="post" class="form_submit">
+            <p><label>Key word</label><input type="text" name="key_word" value="python" required />
+            <p><input type="submit" value="Send" />
+        </form>
+    </div>
+    <div id="graph-container">
+        <iframe id="graph" src={{ vis }} width="810" height="810" scrolling="no"> </iframe>
+    </div>
+
+    </div>
+</body>
+</html>

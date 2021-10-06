@@ -2,7 +2,8 @@ from pyvis.network import Network
 import json
 
 
-def gr_vis(filt_tags_path, node_cut_off_level=1, edge_cut_off_level=1):
+def gr_vis(ip='None', filt_tags_path='data/for_visualization/filt-tags_python.json',
+           node_cut_off_level=1, edge_cut_off_level=1):
     with open(filt_tags_path, 'r', encoding="utf-8") as f:
         tags_json = json.load(f)
 
@@ -33,7 +34,7 @@ def gr_vis(filt_tags_path, node_cut_off_level=1, edge_cut_off_level=1):
              and link["target"] in nodes
              and int(link_nc * link["value"]) > edge_cut_off_level]
 
-    net = Network(640, 640)
+    net = Network(800, 800)
 
     for node, node_size, color in zip(nodes, nodes_size, nodes_color):
         net.add_node(node, hidden=False, shape='dot', color=color, size=node_size, mass=node_size,
@@ -41,13 +42,14 @@ def gr_vis(filt_tags_path, node_cut_off_level=1, edge_cut_off_level=1):
 
     net.add_edges(edges)
     net.inherit_edge_colors(False)
-    with open('var_options.json', 'r', encoding="utf-8") as f:
+    with open('tmp/var_options.json', 'r', encoding="utf-8") as f:
         var_options = f.read()
     net.set_options(f'{var_options}')
     # net.show_buttons()
-    net.write_html('graph_visualisation.html')
-    # net.show('graph_visualisation.html')
+    path = f'tmp/graph_visualisation{ip}.html'
+    net.save_graph(path)
+    return path
 
 
 if __name__ == '__main__':
-    gr_vis('data/for_visualization/filt-tags_machine-learning.json', node_cut_off_level=5, edge_cut_off_level=5)
+    gr_vis('123234', 'data/for_visualization/filt-tags_python.json', node_cut_off_level=5, edge_cut_off_level=5)

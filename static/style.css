@@ -31,11 +31,6 @@ ul {
   padding: 0 0 0 0;
 }
 
-.graph {
-  width: 80vw;
-  height: 100vh;
-}
-
 .button-container {
   display: flex;
   flex-direction: row;
@@ -47,5 +42,14 @@ ul {
   justify-content: center;
 }
 #graph {
-  border: none
+  border: none;
+  align: center
+  margin: none
+}
+.line {
+    width: 80%; /* ширина линии */
+    height: 4px; /* высота / толщина линии */
+    background: #333; /* фон / цвет линии */
+    border: 0; /* рамка вокруг разделительной линии (уберем ее) */
+    margin: 5px 0 5px 0; /* отступ над и под линией 5 пикселей */
 }
