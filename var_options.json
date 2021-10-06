@@ -1,0 +1,38 @@
+{
+  "edges":{
+    "color": {
+      "color":"rgba(66,66,65,0.58)",
+      "highlight":"rgba(255,148,45,1)",
+      "inherit": false,
+      "opacity":1.0
+    },
+    "smooth": {
+      "enabled": true,
+      "type": "cubicBezier",
+      "roundness": 0.5
+    }
+  },
+  "nodes":{
+    "font":{
+      "strokeWidth": 3
+    }
+   },
+  "physics": {
+    "barnesHut": {
+      "gravitationalConstant": -1000,
+      "centralGravity": 5,
+      "springLength": 50,
+      "springConstant": 0.02,
+      "damping": 0.5,
+      "avoidOverlap": 0.2
+    },
+    "minVelocity": 0.75
+  },
+  "interaction":{
+    "navigationButtons": true
+  }
+
+}
+
+
+
