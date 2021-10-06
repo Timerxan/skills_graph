@@ -43,7 +43,7 @@ def gr_vis(filt_tags_path, node_cut_off_level=1, edge_cut_off_level=1):
     net.inherit_edge_colors(False)
     with open('var_options.json', 'r', encoding="utf-8") as f:
         var_options = f.read()
-    net.set_options(f'var_options={var_options}')
+    net.set_options(f'{var_options}')
     # net.show_buttons()
     net.write_html('graph_visualisation.html')
     # net.show('graph_visualisation.html')
