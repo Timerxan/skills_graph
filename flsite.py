@@ -20,7 +20,7 @@ def send():
     style = url_for('static', filename='style.css')
     if request.method == 'POST':
         key_word = request.form['key_word']
-        key_word, node_level, edge_level = key_word.split(':')
+        key_word, node_level, edge_level = key_word.split(',')
         visualisation = url_for('user_graph', ip=ip, key_word=key_word,
                                 node_level=int(node_level), edge_level=int(edge_level))
         return render_template('index.html', style=style, vis=visualisation)
