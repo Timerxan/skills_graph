@@ -22,9 +22,9 @@ def gr_vis(ip='None', key_word='python', node_level=5, edge_level=5):
                   if int(node_nc * node["popularity"]) > node_level]
 
     def color_from_popularity(popularity):  # popularity 0-100
-        if popularity > 85 : return 'red'
-        elif popularity > 60 : return 'yellow'
-        elif popularity > 35 : return 'green'
+        if popularity > 75 : return 'red'
+        elif popularity > 50 : return 'yellow'
+        elif popularity > 25 : return 'green'
         else : return 'blue'
 
     nodes_color = [color_from_popularity(node_nc*node["popularity"])
