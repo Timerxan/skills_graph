@@ -22,10 +22,10 @@ def gr_vis(ip='None', key_word='python', node_level=5, edge_level=5):
                   if int(node_nc * node["popularity"]) > node_level]
 
     def color_from_popularity(popularity):  # popularity 0-100
-        if popularity > 75 : return 'red'
-        elif popularity > 50 : return 'yellow'
-        elif popularity > 25 : return 'green'
-        else : return 'blue'
+        if popularity > 50:
+            return '#%02x%02x%02x' % (int((popularity-50)/50*255), int((100-popularity)/50*255), 0)
+        else:
+            return '#%02x%02x%02x' % (0, int(popularity/50*255), int((100-popularity)/100*255))
 
     nodes_color = [color_from_popularity(node_nc*node["popularity"])
                    for node in tags_json["items"]["nodes"]
@@ -48,7 +48,7 @@ def gr_vis(ip='None', key_word='python', node_level=5, edge_level=5):
     with open('tmp/var_options.json', 'r', encoding="utf-8") as f:
         var_options = f.read()
     net.set_options(f'{var_options}')
-    # net.show_buttons()
+    # net.show_buttons(filter_='physics')
     path = f'tmp/graph_visualisation{ip}_{key_word}.html'
     net.save_graph(path)
     return path

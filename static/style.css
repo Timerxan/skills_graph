@@ -43,8 +43,11 @@ ul {
 }
 #graph {
   border: none;
-  align: center
-  margin: none
+  align: left;
+  margin: 0px 0px 0px 0px;
+  width: 820px;
+  height: 830px;
+  padding: 0% 0% 0% 0%;
 }
 .line {
     width: 80%; /* ширина линии */
@@ -52,4 +55,10 @@ ul {
     background: #333; /* фон / цвет линии */
     border: 0; /* рамка вокруг разделительной линии (уберем ее) */
     margin: 5px 0 5px 0; /* отступ над и под линией 5 пикселей */
+}
+.form_submit {
+    align: center;
+    margin: 3px 0 3px 0;
+    padding: 0% 0% 0% 0%
+
 }

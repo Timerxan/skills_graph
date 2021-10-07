@@ -34,13 +34,12 @@
     <div class = "line"></div>
     <div id="button-container">
         <form action="/send" method="post" class="form_submit">
-            <p><label>Key word</label><input type="text" name="key_word" value="" required />
+            <p><label>Key word </label>
+            <p><input type="text" name="key_word" value="" required />
             <p><input type="submit" value="Send" />
         </form>
     </div>
-    <div id="graph-container">
-        <iframe id="graph" src={{ vis }} width="810" height="810" scrolling="no"> </iframe>
-    </div>
+        <iframe id="graph" src={{ vis }} scrolling="no" align="center"> </iframe>
 
     </div>
 </body>
