@@ -1,8 +1,8 @@
 {
   "edges":{
     "color": {
-      "color":"rgba(66,66,65,0.58)",
-      "highlight":"rgba(255,148,45,1)",
+      "color":"rgba(66,66,68,0.6)",
+      "highlight":"rgba(255,150,50,0.75)",
       "inherit": false,
       "opacity":1.0
     },

@@ -40,7 +40,7 @@ def gr_vis(ip='None', key_word='python', node_level=5, edge_level=5):
     net = Network(800, 800)
 
     for node, node_size, color in zip(nodes, nodes_size, nodes_color):
-        net.add_node(node, hidden=False, shape='dot', color=color, size=node_size, mass=node_size,
+        net.add_node(node, hidden=False, shape='dot', color=color, size=node_size, mass=12-node_size,
                      borderWidth=0, borderWidthSelected=2)
 
     net.add_edges(edges)
