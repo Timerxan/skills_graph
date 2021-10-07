@@ -19,12 +19,12 @@
    },
   "physics": {
     "barnesHut": {
-      "gravitationalConstant": -1000,
+      "gravitationalConstant": -800,
       "centralGravity": 5,
       "springLength": 50,
       "springConstant": 0.02,
       "damping": 0.5,
-      "avoidOverlap": 0.2
+      "avoidOverlap": 0.5
     },
     "minVelocity": 0.75
   },
