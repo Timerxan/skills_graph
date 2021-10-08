@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request
 from graph_vis import gr_vis
-import json
+from os import remove
 
 
 app = Flask(__name__)
@@ -31,7 +31,7 @@ def user_graph(ip, key_word, node_level, edge_level):
     path = gr_vis(ip, key_word, int(node_level), int(edge_level))
     with open(path, 'r', encoding="utf-8") as f:
         graph_html = f.read()
-
+    remove(path)
     return graph_html
 
 

@@ -45,7 +45,7 @@ def gr_vis(ip='None', key_word='python', node_level=5, edge_level=5):
 
     net.add_edges(edges)
     net.inherit_edge_colors(False)
-    with open('tmp/var_options.json', 'r', encoding="utf-8") as f:
+    with open('static/var_options.json', 'r', encoding="utf-8") as f:
         var_options = f.read()
     net.set_options(f'{var_options}')
     # net.show_buttons(filter_='physics')
