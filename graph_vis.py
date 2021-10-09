@@ -2,7 +2,7 @@ from pyvis.network import Network
 import json
 
 
-def gr_vis(ip='None', key_word='python', node_level=5, edge_level=5):
+def gr_vis(key_word="Hello!", node_level=5, edge_level=5):
 
     with open('data/for_visualization/index.json', 'r', encoding="utf-8") as f:
         key_words_json = json.load(f)
@@ -40,7 +40,7 @@ def gr_vis(ip='None', key_word='python', node_level=5, edge_level=5):
     net = Network(800, 800)
 
     for node, node_size, color in zip(nodes, nodes_size, nodes_color):
-        net.add_node(node, hidden=False, shape='dot', color=color, size=node_size, mass=12-node_size,
+        net.add_node(node, hidden=False, shape='dot', color=color, size=2*node_size, mass=12-node_size,
                      borderWidth=0, borderWidthSelected=2)
 
     net.add_edges(edges)
@@ -48,11 +48,10 @@ def gr_vis(ip='None', key_word='python', node_level=5, edge_level=5):
     with open('static/var_options.json', 'r', encoding="utf-8") as f:
         var_options = f.read()
     net.set_options(f'{var_options}')
-    # net.show_buttons(filter_='physics')
-    path = f'tmp/graph_visualisation{ip}_{key_word}.html'
+    # net.show_buttons()
+    path = f'tmp/graph_visualisation_{key_word}_{node_level}_{edge_level}.html'
     net.save_graph(path)
     return path
 
-
 if __name__ == '__main__':
-    gr_vis('123234', key_word='python', node_level=5, edge_level=5)
+    gr_vis(key_word='python', node_level=5, edge_level=5)

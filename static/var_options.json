@@ -24,7 +24,7 @@
       "springLength": 50,
       "springConstant": 0.02,
       "damping": 0.5,
-      "avoidOverlap": 0.5
+      "avoidOverlap": 1
     },
     "minVelocity": 0.75
   },
