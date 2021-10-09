@@ -31,7 +31,7 @@ def gr_vis(key_word="Hello!", node_level=5, edge_level=5):
                    for node in tags_json["items"]["nodes"]
                    if int(node_nc * node["popularity"]) > node_level]
 
-    edges = [(link["source"], link["target"], int(link_nc * link["value"]/15))
+    edges = [(link["source"], link["target"], int(link_nc * link["value"]/10))
              for link in tags_json["items"]["links"]
              if link["source"] in nodes
              and link["target"] in nodes
