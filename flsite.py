@@ -14,19 +14,21 @@ def index():
     style = url_for('static', filename='style.css')
     tags = get_tag_list()
     visualisation = url_for('user_graph', key_word='Hello', node_level=0, edge_level=0)
-    return render_template('index.html', style=style, vis=visualisation, tags=tags, chosen_tag='Choose interested tag')
+    return render_template('index.html', style=style, vis=visualisation,
+                           tags=tags, chosen_tag='Choose interested tag', node_level=5)
 
 
-@app.route('/<tag>', methods=['POST', 'GET'])
+@app.route('/send_<tag>', methods=['POST', 'GET'])
 def send(tag):
     style = url_for('static', filename='style.css')
     tags = get_tag_list()
     if request.method == 'POST':
-        key_word = request.values['button']
-        key_word, node_level, edge_level = key_word.split(',')
+        key_word = tag
+        node_level = request.form['node_level']
         visualisation = url_for('user_graph', key_word=key_word,
-                                node_level=int(node_level), edge_level=int(edge_level))
-        return render_template('index.html', style=style, vis=visualisation, tags=tags, chosen_tag=tag)
+                                node_level=int(node_level), edge_level=int(node_level))
+        return render_template('index.html', style=style, vis=visualisation,
+                               tags=tags, chosen_tag=key_word, node_level=node_level)
 
 
 @app.route('/user_graph_<key_word>_<node_level>_<edge_level>', methods=['POST', 'GET'])

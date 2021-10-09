@@ -53,5 +53,6 @@ def gr_vis(key_word="Hello!", node_level=5, edge_level=5):
     net.save_graph(path)
     return path
 
+
 if __name__ == '__main__':
     gr_vis(key_word='python', node_level=5, edge_level=5)

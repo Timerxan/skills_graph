@@ -34,17 +34,29 @@
         <div class = "line">
         </div>
         <div class="button-container">
-            <form method="POST" >
+
+                <div>
                 {% for t in tags%}
-                <button class="c-button" name = "button" type="submit" value = "{{t}},1,1" formaction={{url_for('send',tag=t)}}>
+                <button form="form_1" class="c-button" name = "chosen_tag" type="submit" value = "{{t}}"
+                        formaction ={{url_for('send',tag=t)}}>
                     {{t}}
                 </button>
                 {% endfor %}
+                </div>
+                <div class="label"><div id="left_edge">0%</div>
+                     <div id="center">Cutoff most unpopular {{node_level}}% tags</div>
+                     <div id="righ_edge">10%</div>
+                </div>
+                <div>
+                    <input form="form_1" class="slider" type="range" name="node_level" min="0" max="10" step="1" value="{{node_level}}">
+                </div>
+            <form method="POST" id="form_1">
             </form>
-        </div>
-        <h2 class="chosen_tag">{{chosen_tag}}</h2>
-        <div>
-            <iframe id="graph" src={{ vis }} scrolling="no" align="center"> </iframe>
+
+            <h2 class="chosen_tag">Current tag: {{chosen_tag}}</h2>
+            <div>
+                <iframe id="graph" src={{ vis }} scrolling="no" align="center"> </iframe>
+            </div>
         </div>
     </div>
 </body>
