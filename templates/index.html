@@ -44,7 +44,7 @@
                 {% endfor %}
                 </div>
                 <div class="label"><div id="left_edge">0%</div>
-                     <div id="center">Cutoff tags with popularity less than {{node_level}}%</div>
+                     <div id="center">Cutoff tags with popularity less than %</div>
                      <div id="righ_edge">10%</div>
                 </div>
                 <div>
@@ -53,7 +53,7 @@
             <form method="POST" id="form_1">
             </form>
 
-            <h2 class="chosen_tag">Current tag: {{chosen_tag}}</h2>
+            <h2 class="chosen_tag">Current tag: {{chosen_tag}}. Cuttoff level: {{node_level}}%</h2>
             <div>
                 <iframe id="graph" src={{ vis }} scrolling="no" align="center"> </iframe>
             </div>
