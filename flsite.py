@@ -5,9 +5,11 @@ import json
 
 app = Flask(__name__)
 
+
 def get_tag_list():
     with open('data/for_visualization/index.json', 'r', encoding="utf-8") as f:
         return json.load(f).keys()
+
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
