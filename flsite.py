@@ -17,7 +17,7 @@ def index():
     tags = get_tag_list()
     visualisation = url_for('user_graph', key_word='Hello', node_level=0, edge_level=0)
     return render_template('index.html', style=style, vis=visualisation,
-                           tags=tags, chosen_tag='Choose interested tag', node_level=5)
+                           tags=tags, chosen_tag='Choose interested tag', node_level=0)
 
 
 @app.route('/send_<tag>', methods=['POST', 'GET'])
