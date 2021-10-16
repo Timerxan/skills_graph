@@ -3,19 +3,30 @@ import sqlite3 as sq
 DATA_BASE = "scrapers/sql_database/hh_vacancies.db"
 
 
-def execute_query(query, db_name=DATA_BASE):
+def execute_script(script, db_name=DATA_BASE):
     try:
         with sq.connect(db_name) as con:
-            cursor = con.cursor()
-            cursor.executescript(query)
-            row = cursor.fetchall()
-        return row
+            cur = con.cursor()
+            cur.executescript(script)
+            return True
     except Exception as ex:
         print(ex)
         return False
 
 
-def query_generator(query: str, options: list):
+def execute_query(query, db_name=DATA_BASE):
+    try:
+        with sq.connect(db_name) as con:
+            cur = con.cursor()
+            cur.execute(query)
+            return cur.fetchall()
+    except Exception as ex:
+        print(ex)
+        return
+
+
+def query_generator(pattern: str, options: list):
+    query = pattern
     for a in options:
         query = query.replace('|?|', a, 1)
     return query
@@ -27,7 +38,7 @@ def create_table(table_name: str, columns: list):
 
 
 def add_column(table_name: str, column: str):
-    pattern = """ ALTER TABLE |?| ADD COLUMN |?| ;"""
+    pattern = """ ALTER TABLE |?| ADD COLUMN |?| """
     return query_generator(pattern, [table_name, column])
 
 
@@ -42,9 +53,12 @@ def update_table(table_name: str, columns: list, values: list, conditions: str):
                            [table_name, ','.join([f'{col}={val}' for col, val in zip(columns, values)]), conditions])
 
 
+def select_data(table_name: str, columns: list, conditions: str):
+    pattern = """ SELECT |?| FROM |?| WHERE |?| """
+    return query_generator(pattern, [','.join(columns), table_name, conditions])
 
 
 if __name__ == '__main__':
-    query = insert_into_table("vacancy_ids", ["vac_id", "publish_date"], ['23423423', "'fdfsdf234-34f'"])
+    query = select_data("vacancy_ids", ["vac_id"], 'vac_id<40000000')
     print(query)
-    execute_query(query)
+    print(execute_query(query))
